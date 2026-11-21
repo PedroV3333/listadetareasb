@@ -1,0 +1,180 @@
+/* Estilos generales de la página */
+/*body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}*/
+
+/* Centra todo en la pantalla y da un fondo de contraste */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* El contenedor de la app mantiene siempre el mismo tamaño y diseño */
+.agenda-container {
+  width: 408px;           /* Ancho */
+  height: 700px;          /* Alto  */
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Aqui el padding no rompe el ancho */
+  overflow-y: auto;       
+}
+
+
+/* Contenedor principal de la agenda */
+/*.agenda-container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 750px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-top: 6px solid #4a90e2;
+}*/
+
+/* Encabezado con título a la izquierda y fecha actual a la derecha */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin: 0;
+    text-transform: lowercase; /* Mantiene el estilo en minúsculas pedido */
+}
+
+.fecha-actual {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #7f8c8d;
+    background-color: #ecf0f1;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+/* Títulos principales: actividades (izquierda) e hecho (derecha) */
+.seccion-titulos {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #34495e;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+/* Filas donde se escriben las actividades */
+.linea-actividad {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+/* Campo tipo línea de cuaderno para escribir */
+.input-actividad {
+    flex: 1;
+    border: none;
+    border-bottom: 2px dashed #bdc3c7;
+    padding: 6px 4px;
+    font-size: 1rem;
+    outline: none;
+    background: transparent;
+    transition: border-color 0.3s;
+}
+
+.input-actividad:focus {
+    border-bottom-color: #4a90e2;
+}
+
+/* Opciones de estado (Hecho / No hecho) */
+.opciones-estado {
+    display: flex;
+    gap: 10px;
+}
+
+.estado-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Sección inferior: Selección de fecha y botones */
+.panel-controles {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #e0e0e0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+
+.selector-fecha {
+    display: flex;
+    gap: 6px;
+}
+
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-size: 0.95rem;
+    background-color: #fff;
+}
+
+/* Botones de Guardar y Abrir */
+.btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-guardar {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.btn-guardar:hover {
+    background-color: #27ae60;
+}
+
+.btn-abrir {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-abrir:hover {
+    background-color: #2980b9;
+}
