@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tareas 2026 a 2027</title>
+  <link rel="stylesheet" href="css/index.css">
+  
+</head>
+
+<body>
+<div class="agenda-container">
+    
+    <!-- Encabezado con título y fecha actual -->
+    <header class="header">
+      <h1>Lista de Tareas 2026 a 2027</h1>
+      <div id="fechaActual" class="fecha-actual">Cargando fecha...</div>
+    </header>
+
+    <!-- Encabezados de columnas -->
+    <div class="seccion-titulos">
+      <span>actividades</span>
+      <span>hecho ?</span>
+    </div>
+
+    <!-- Lista de 5 líneas para agregar actividades -->
+    <div id="listaActividades">
+
+      <div class="linea-actividad">
+        <input type="text" class="input-actividad" placeholder="Escribe tu actividad aquí...">
+        <div class="opciones-estado">
+          <label class="estado-label">
+            <input type="radio" name="estado_0" value="si"> Sí
+          </label>
+          <label class="estado-label">
+            <input type="radio" name="estado_0" value="no"> No
+          </label>
+        </div>
+      </div>
+
+      <div class="linea-actividad">
+        <input type="text" class="input-actividad" placeholder="Escribe tu actividad aquí...">
+        <div class="opciones-estado">
+          <label class="estado-label">
+            <input type="radio" name="estado_1" value="si"> Sí
+          </label>
+          <label class="estado-label">
+            <input type="radio" name="estado_1" value="no"> No
+          </label>
+        </div>
+      </div>
+
+      <div class="linea-actividad">
+        <input type="text" class="input-actividad" placeholder="Escribe tu actividad aquí...">
+        <div class="opciones-estado">
+          <label class="estado-label">
+            <input type="radio" name="estado_2" value="si"> Sí
+          </label>
+          <label class="estado-label">
+            <input type="radio" name="estado_2" value="no"> No
+          </label>
+        </div>
+      </div>
+
+      <div class="linea-actividad">
+        <input type="text" class="input-actividad" placeholder="Escribe tu actividad aquí...">
+        <div class="opciones-estado">
+          <label class="estado-label">
+            <input type="radio" name="estado_3" value="si"> Sí
+          </label>
+          <label class="estado-label">
+            <input type="radio" name="estado_3" value="no"> No
+          </label>
+        </div>
+      </div>
+
+      <div class="linea-actividad">
+        <input type="text" class="input-actividad" placeholder="Escribe tu actividad aquí...">
+        <div class="opciones-estado">
+          <label class="estado-label">
+            <input type="radio" name="estado_4" value="si"> Sí
+          </label>
+          <label class="estado-label">
+            <input type="radio" name="estado_4" value="no"> No
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Panel de controles: Selección de fecha y botones de acción -->
+    <div class="panel-controles">
+      <div class="selector-fecha">
+        <!-- Selección de Día -->
+        <select id="selectDia">
+          <option value="">Día</option>
+          <!-- Los días se generan dinámicamente o manualmente del 1 al 31 -->
+        </select>
+
+        <!-- Selección de Mes -->
+        <select id="selectMes">
+          <option value="">Mes</option>
+          <option value="01">Enero</option>
+          <option value="02">Febrero</option>
+          <option value="03">Marzo</option>
+          <option value="04">Abril</option>
+          <option value="05">Mayo</option>
+          <option value="06">Junio</option>
+          <option value="07">Julio</option>
+          <option value="08">Agosto</option>
+          <option value="09">Septiembre</option>
+          <option value="10">Octubre</option>
+          <option value="11">Noviembre</option>
+          <option value="12">Diciembre</option>
+        </select>
+
+        <!-- Selección de Año (limitado a 2026 y 2027) -->
+        <select id="selectAnio">
+          <option value="">Año</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+        </select>
+      </div>
+
+      <!-- Botón para guardar las actividades del día elegido -->
+      <button class="btn btn-guardar" onclick="guardarActividades()">Guardar</button>
+
+      <!-- Botón para abrir las actividades guardadas en la fecha elegida -->
+      <button class="btn btn-abrir" onclick="abrirActividades()">Abrir</button>
+    </div>
+
+  </div>
+
+  <!-- Lógica JavaScript para hacer funcionar los botones y guardar datos -->
+  <script>
+    // 1. Desplegar la fecha actual en la esquina superior derecha
+    function mostrarFechaActual() {
+      const hoy = new Date();
+      const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('fechaActual').textContent = hoy.toLocaleDateString('es-ES', opciones);
+    }
+
+    // 2. Llenar automáticamente los días del 1 al 31 en el <select>
+    function poblarDias() {
+      const selectDia = document.getElementById('selectDia');
+      for (let i = 1; i <= 31; i++) {
+        const diaNum = i < 10 ? '0' + i : i;
+        const option = document.createElement('option');
+        option.value = diaNum;
+        option.textContent = diaNum;
+        selectDia.appendChild(option);
+      }
+    }
+
+    // 3. Obtener la fecha seleccionada en el formulario
+    function obtenerFechaSeleccionada() {
+      const dia = document.getElementById('selectDia').value;
+      const mes = document.getElementById('selectMes').value;
+      const anio = document.getElementById('selectAnio').value;
+
+      if (!dia || !mes || !anio) {
+        alert('Por favor selecciona un día, mes y año válidos.');
+        return null;
+      }
+
+      return `${anio}-${mes}-${dia}`;
+    }
+
+    // 4. Función para guardar actividades en el navegador (LocalStorage)
+    function guardarActividades() {
+      const claveFecha = obtenerFechaSeleccionada();
+      if (!claveFecha) return;
+
+      const lineas = document.querySelectorAll('.linea-actividad');
+      const datosGuardar = [];
+
+      lineas.forEach((linea, index) => {
+        const texto = linea.querySelector('.input-actividad').value;
+        const radioSeleccionado = linea.querySelector(`input[name="estado_${index}"]:checked`);
+        const estado = radioSeleccionado ? radioSeleccionado.value : null;
+
+        if (texto.trim() !== '') {
+          datosGuardar.push({ texto, estado });
+        }
+      });
+
+      localStorage.setItem(`agenda_${claveFecha}`, JSON.stringify(datosGuardar));
+      alert(`¡Actividades guardadas correctamente para la fecha: ${claveFecha}!`);
+    }
+
+    // 5. Función para abrir actividades guardadas en la fecha seleccionada
+    function abrirActividades() {
+      const claveFecha = obtenerFechaSeleccionada();
+      if (!claveFecha) return;
+
+      const datosGuardados = localStorage.getItem(`agenda_${claveFecha}`);
+
+      // Limpiar todos los campos antes de cargar nuevos datos
+      limpiarCampos();
+
+      if (!datosGuardados) {
+        alert(`No hay ninguna actividad registrada para el día ${claveFecha}.`);
+        return;
+      }
+
+      const actividades = JSON.parse(datosGuardados);
+      const lineas = document.querySelectorAll('.linea-actividad');
+
+      actividades.forEach((item, index) => {
+        if (lineas[index]) {
+          lineas[index].querySelector('.input-actividad').value = item.texto;
+          if (item.estado) {
+            const radio = lineas[index].querySelector(`input[name="estado_${index}"][value="${item.estado}"]`);
+            if (radio) radio.checked = true;
+          }
+        }
+      });
+
+      alert(`Se cargaron las actividades del ${claveFecha}.`);
+    }
+
+    // Función auxiliar para reiniciar el formulario
+    function limpiarCampos() {
+      const lineas = document.querySelectorAll('.linea-actividad');
+      lineas.forEach((linea, index) => {
+        linea.querySelector('.input-actividad').value = '';
+        const radios = linea.querySelectorAll(`input[name="estado_${index}"]`);
+        radios.forEach(radio => radio.checked = false);
+      });
+    }
+
+    // Inicializar funciones al cargar la página
+    mostrarFechaActual();
+    poblarDias();
+  </script>
+</body>
+</html>
